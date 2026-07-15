@@ -3,6 +3,7 @@ import { WalletButton } from "@/components/wallet/wallet-button";
 import { TradePanel } from "@/components/trade/trade-panel";
 import { Sidebar } from "@/components/shell/sidebar";
 import { MarketsTable } from "@/components/markets/markets-table";
+import { HowItWorks } from "@/components/marketing/how-it-works";
 import { Tour } from "@/components/ui/tour";
 import { GuideButton } from "@/components/ui/guide-button";
 
@@ -24,9 +25,7 @@ export default function Home() {
             </p>
             <div className="cta-row">
               <a className="btn btn-accent" href="#terminal">Start trading</a>
-              <a className="btn btn-ghost" href="https://docs.robinhood.com/chain/" target="_blank" rel="noreferrer">
-                How it works
-              </a>
+              <a className="btn btn-ghost" href="#how">How it works</a>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="hero-logo" src="/neighbor-hero.png" alt="Neighbor" aria-hidden />
@@ -38,6 +37,8 @@ export default function Home() {
             <div className="stat"><div className="k">Custody</div><div className="v">Noncustodial</div></div>
             <div className="stat"><div className="k">Deterministic guards</div><div className="v">40 checks</div></div>
           </div>
+
+          <HowItWorks />
 
           {/* Terminal */}
           <section className="section" id="terminal">

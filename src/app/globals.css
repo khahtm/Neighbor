@@ -32,7 +32,30 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 html { background: var(--bg); scroll-behavior: smooth; } /* base color + smooth in-page nav scroll */
-#terminal, #markets, #wallet { scroll-margin-top: 18px; } /* breathing room when a nav link jumps here */
+#terminal, #markets, #wallet, #how { scroll-margin-top: 18px; } /* breathing room when a nav link jumps here */
+
+/* How it works — step list beside a live preview of the real confirm dialog. */
+.how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: start; margin-top: 18px; }
+.how-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px; }
+.how-step { display: flex; gap: 14px; }
+.how-num {
+  flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  font-weight: 800; font-size: 14px; color: #0a0a0c;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 0 16px rgba(208, 248, 0, .3);
+}
+.how-step-title { margin: 3px 0 4px; font-weight: 700; font-size: 15px; }
+.how-step-body { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+.how-preview {
+  border: 1px solid var(--line-2); border-radius: 14px; overflow: hidden; background: var(--panel);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, .6), 0 0 0 1px rgba(208, 248, 0, .06);
+}
+.how-preview-bar { display: flex; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: var(--bg-2); }
+.how-preview-bar span { width: 11px; height: 11px; border-radius: 50%; background: var(--line-2); }
+.how-preview-bar span:first-child { background: #ff5f57; }
+.how-preview-bar span:nth-child(2) { background: #febc2e; }
+.how-preview-bar span:nth-child(3) { background: #28c840; }
+.how-preview-body { padding: 18px; }
+@media (max-width: 820px) { .how-grid { grid-template-columns: 1fr; gap: 24px; } }
 body {
   background: transparent;
   color: var(--text);
