@@ -2,9 +2,10 @@ import { TradeCta } from "./trade-cta";
 
 /**
  * Markets list for the landing — token-general (Neighbor trades any token, not only equities).
- * Tokens + status are Neighbor's own verified Robinhood Chain testnet data (discovered on-chain),
- * not third-party content. TSLA has a confirmed funded USDC pool; the rest are listed tokens on the
- * chain. No fabricated prices — testnet pricing is arbitrary, so we show pair + liquidity status.
+ * Tokens + status are Neighbor's own verified Robinhood Chain testnet data (discovered on-chain by
+ * enumerating the factory's pools), not third-party content. Every row here has a confirmed funded
+ * USDC pool with deep liquidity, so each is actually tradeable through the terminal. No fabricated
+ * prices — testnet pricing is arbitrary, so we show pair + liquidity status only.
  */
 interface Market {
   symbol: string;
@@ -15,11 +16,11 @@ interface Market {
 
 const MARKETS: Market[] = [
   { symbol: "TSLA", name: "Tesla", pair: "TSLA / USDC", status: "live" },
-  { symbol: "WETH", name: "Wrapped Ether", pair: "WETH / USDC", status: "listed" },
-  { symbol: "AMZN", name: "Amazon", pair: "AMZN / USDC", status: "listed" },
-  { symbol: "SYN", name: "Synapse", pair: "SYN / USDC", status: "listed" },
-  { symbol: "NVDA", name: "NVIDIA", pair: "NVDA / USDC", status: "listed" },
-  { symbol: "LEAF", name: "Leaf", pair: "LEAF / USDC", status: "listed" },
+  { symbol: "AMZN", name: "Amazon", pair: "AMZN / USDC", status: "live" },
+  { symbol: "NFLX", name: "Netflix", pair: "NFLX / USDC", status: "live" },
+  { symbol: "AMD", name: "AMD", pair: "AMD / USDC", status: "live" },
+  { symbol: "PLTR", name: "Palantir", pair: "PLTR / USDC", status: "live" },
+  { symbol: "WETH", name: "Wrapped Ether", pair: "WETH / USDC", status: "live" },
 ];
 
 export function MarketsTable() {

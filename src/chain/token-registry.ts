@@ -30,6 +30,9 @@ const TESTNET: Registry = {
   mUSD: { symbol: "mUSD", name: "Mock USD", decimals: 18, address: "0xCc4225D5F36b26b211675E8d9B7f11511Ba58D2C", kind: "stablecoin" },
   TSLA: { symbol: "TSLA", name: "Tesla", decimals: 18, address: "0xC9f9c86933092BbbfFF3CCb4b105A4A94bf3Bd4E", kind: "stock", feed: null },
   AMZN: { symbol: "AMZN", name: "Amazon", decimals: 18, address: "0x5884aD2f920c162CFBbACc88C9C51AA75eC09E02", kind: "stock", feed: null },
+  NFLX: { symbol: "NFLX", name: "Netflix", decimals: 18, address: "0x3b8262A63d25f0477c4DDE23F83cfe22Cb768C93", kind: "stock", feed: null },
+  AMD: { symbol: "AMD", name: "AMD", decimals: 18, address: "0x71178BAc73cBeb415514eB542a8995b82669778d", kind: "stock", feed: null },
+  PLTR: { symbol: "PLTR", name: "Palantir", decimals: 18, address: "0x1FBE1a0e43594b3455993B5dE5Fd0A7A266298d0", kind: "stock", feed: null },
   WETH: { symbol: "WETH", name: "Wrapped Ether", decimals: 18, address: "0x33e4191705c386532ba27cBF171Db86919200B94", kind: "native-wrapped" },
 };
 
