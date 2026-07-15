@@ -20,8 +20,10 @@ export function WalletPanel() {
   const [switching, setSwitching] = useState(false);
   const [switchErr, setSwitchErr] = useState<string | null>(null);
 
-  const wallet = wallets[0];
-  const address = user?.wallet?.address ?? wallet?.address ?? null;
+  // Show the EMBEDDED (Privy) wallet — it is the one the money path signs with and the one the user
+  // must fund, even when they logged in with an external wallet like MetaMask.
+  const wallet = wallets.find((w) => w.walletClientType === "privy") ?? wallets[0];
+  const address = wallet?.address ?? user?.wallet?.address ?? null;
   // Privy reports chainId as CAIP-2 ("eip155:46630"). Treat an unknown chain as ok (no false warning).
   const onCorrectChain = !wallet?.chainId || wallet.chainId === `eip155:${activeChain.id}`;
 

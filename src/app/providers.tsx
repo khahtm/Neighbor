@@ -24,9 +24,16 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <PrivyProvider
       appId={appId}
       config={{
+        // Offer both an external wallet (MetaMask/injected/WalletConnect) and email login. Either way
+        // `createOnLogin: all-users` provisions an embedded wallet, which is what the money path signs
+        // with. wallet + email need no extra dashboard OAuth setup; add socials on the Privy dashboard.
+        loginMethods: ["wallet", "email"],
         embeddedWallets: {
-          // Auto-provision a non-custodial wallet for every user on login.
-          ethereum: { createOnLogin: "users-without-wallets" },
+          // Provision a non-custodial embedded wallet for EVERY user, including those who log in with
+          // an external wallet (MetaMask). The money path signs with the embedded wallet because it
+          // supports eth_signTransaction (sign-without-send) — external wallets do not — so an external
+          // wallet is only an auth method, while trades are signed + relayed via the embedded wallet.
+          ethereum: { createOnLogin: "all-users" },
         },
         supportedChains: [robinhoodTestnet, robinhoodMainnet],
         defaultChain: activeChain,
