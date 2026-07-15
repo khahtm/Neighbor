@@ -173,7 +173,9 @@ body::after {
   top: 0;
   height: 100vh;
   overflow-y: auto;
+  scrollbar-width: none; /* hide the scrollbar (Firefox) — still scrollable when content overflows */
 }
+.sidebar::-webkit-scrollbar { width: 0; height: 0; display: none; } /* hide the scrollbar (Chrome/Safari) */
 .brand { display: flex; align-items: center; gap: 10px; padding: 4px 8px 14px; }
 .brand-mark {
   width: 26px; height: 26px; border-radius: 8px;
