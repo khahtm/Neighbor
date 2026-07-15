@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.env
+.env.local
+*.tsbuildinfo
+dist/
+
+# agent/tooling scaffolding — not part of the product
+.claude/
+plans/
+docs/
+
+# foundry build artifacts
+contracts/out/
+contracts/cache/
+contracts/broadcast/

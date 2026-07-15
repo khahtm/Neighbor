@@ -1,0 +1,68 @@
+// Neighbor — swap-only MVP schema. NO Automation model this round (automations deferred).
+// Non-custodial: we store only public wallet addresses, never private keys.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  // Provider (Privy) subject id — links auth identity to app user. No keys stored.
+  authId    String   @unique
+  createdAt DateTime @default(now())
+  wallets   Wallet[]
+  intents   Intent[]
+  txs       Tx[]
+  // ToS/disclaimer acceptance gate before any execute (compliance, Phase 6).
+  tosAcceptedAt DateTime?
+}
+
+model Wallet {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  address   String   // public address only
+  chainEnv  String   // "testnet" | "mainnet" — guards cross-env execution
+  createdAt DateTime @default(now())
+
+  @@unique([address, chainEnv])
+  @@index([userId])
+}
+
+model Intent {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  rawText    String   // original user phrase — shown back in confirm to ratify (C11)
+  action     String   // buy | sell | swap
+  assetSymbol String
+  amount     String   // decimal string; source of truth is deterministic re-parse, not the LLM
+  unit       String   // "USD" | "token" | "%"
+  confidence Float?
+  status     String   @default("pending") // pending | confirmed | rejected | executed
+  createdAt  DateTime @default(now())
+  tx         Tx?
+
+  @@index([userId])
+}
+
+model Tx {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  intentId    String?  @unique
+  intent      Intent?  @relation(fields: [intentId], references: [id])
+  chainEnv    String   // guards cross-env execution (C15)
+  nonce       Int?     // on-chain nonce reserved before signing — chain-level idempotency (C4)
+  hash        String?  @unique
+  state       String   @default("built") // built | approve_pending | swap_pending | confirmed | failed | replaced
+  createdAt   DateTime @default(now())
+  confirmedAt DateTime? // set only after finality depth, not soft confirmation
+
+  @@index([userId])
+}

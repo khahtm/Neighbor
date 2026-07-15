@@ -1,0 +1,39 @@
+import { FAUCET_URL_TESTNET } from "@/chain/chains";
+
+/**
+ * App-shell left navigation. Static/presentational for the MVP — the money-path lives in the main
+ * Terminal view; Docs/Faucet are real external links. Neighbor-original nav, marks, and labels.
+ */
+export function Sidebar() {
+  return (
+    <aside className="sidebar">
+      <div className="brand">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="brand-logo" src="/neighbor-logo.png" alt="Neighbor" />
+      </div>
+
+      <div className="nav-new">+ New order</div>
+
+      <div className="nav-group">Trade</div>
+      <a className="nav-item active" href="#terminal"><span className="ico">◧</span> Terminal</a>
+      <a className="nav-item" href="#wallet"><span className="ico">▣</span> Wallet</a>
+      <div className="nav-item soft"><span className="ico">◔</span> Portfolio <span className="nav-badge">Soon</span></div>
+
+      <div className="nav-group">Explore</div>
+      <a className="nav-item" href="#markets"><span className="ico">≣</span> Markets</a>
+      <div className="nav-item soft"><span className="ico">◷</span> Activity <span className="nav-badge">Soon</span></div>
+
+      <div className="nav-group">Resources</div>
+      <a className="nav-item" href="https://docs.robinhood.com/chain/" target="_blank" rel="noreferrer">
+        <span className="ico">◈</span> RH Chain docs
+      </a>
+      <a className="nav-item" href={FAUCET_URL_TESTNET} target="_blank" rel="noreferrer">
+        <span className="ico">⛽</span> Testnet faucet
+      </a>
+
+      <div className="sidebar-foot">
+        <span className="pill live">Noncustodial</span>
+      </div>
+    </aside>
+  );
+}

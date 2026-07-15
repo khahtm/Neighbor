@@ -1,0 +1,32 @@
+# Local Postgres for Neighbor. Credentials + port match DATABASE_URL in .env
+# (postgresql://user:password@localhost:5436/bankroute). Local dev only — not production.
+#
+#   docker compose up -d        # start (detached)
+#   npm run prisma:migrate      # apply migrations (idempotent — skips already-applied)
+#   docker compose down         # stop (keeps data in the named volume)
+#   docker compose down -v      # stop and wipe data
+#
+# The data volume is pinned to `bankroute-pgdata` (no compose project prefix): it adopts the existing
+# local volume of the same name here, and is created fresh on a clean machine.
+services:
+  postgres:
+    image: postgres:16 # matches the image the bankroute-pgdata volume was initialized with
+    container_name: bankroute-pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: bankroute
+    ports:
+      - "5436:5432" # host 5436 -> container 5432 (matches DATABASE_URL)
+    volumes:
+      - bankroute-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d bankroute"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  bankroute-pgdata:
+    name: bankroute-pgdata
