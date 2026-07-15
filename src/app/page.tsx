@@ -3,6 +3,8 @@ import { WalletButton } from "@/components/wallet/wallet-button";
 import { TradePanel } from "@/components/trade/trade-panel";
 import { Sidebar } from "@/components/shell/sidebar";
 import { MarketsTable } from "@/components/markets/markets-table";
+import { Tour } from "@/components/ui/tour";
+import { GuideButton } from "@/components/ui/guide-button";
 
 export default function Home() {
   return (
@@ -10,7 +12,7 @@ export default function Home() {
       <Sidebar />
       <div className="main">
         <div className="main-inner">
-          <div className="topbar"><WalletButton /></div>
+          <div className="topbar"><GuideButton /><WalletButton /></div>
           {/* Hero — all copy is Neighbor-original */}
           <section className="hero">
             <span className="hero-badge">● Natural language trading</span>
@@ -52,6 +54,7 @@ export default function Home() {
           <MarketsTable />
         </div>
       </div>
+      <Tour />
     </div>
   );
 }

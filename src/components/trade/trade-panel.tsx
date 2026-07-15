@@ -8,6 +8,7 @@ import { publicClient, erc20Allowance } from "@/chain/client";
 import { activeChain, CHAIN_ENV } from "@/chain/chains";
 import { ConfirmDialog, type QuotePreview } from "./confirm-dialog";
 import { Working } from "@/components/ui/working";
+import { Tip } from "@/components/ui/tip";
 
 /**
  * Trade terminal (Phase 4 UI). Drives the non-custodial money path client-side: NL preview
@@ -299,6 +300,7 @@ export function TradePanel() {
       <div className="row" style={{ gap: 10 }}>
         <input
           className="input prompt-input"
+          data-tour="command"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="e.g. Sell 0.05 TSLA"
@@ -309,7 +311,7 @@ export function TradePanel() {
         </button>
       </div>
 
-      <div className="chip-row">
+      <div className="chip-row" data-tour="examples">
         <span className="chip-hint">Try</span>
         {TRADE_EXAMPLES.map((ex) => (
           <button key={ex} className="chip" onClick={() => { setText(ex); void preview(ex); }} disabled={busy}>
@@ -317,6 +319,8 @@ export function TradePanel() {
           </button>
         ))}
       </div>
+
+      <Tip />
 
       {notice && <p className="notice">{notice}</p>}
 
