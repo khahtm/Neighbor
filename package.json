@@ -6,7 +6,7 @@
   "description": "Neighbor — non-custodial AI natural-language swap terminal on Robinhood Chain (swap-only MVP).",
   "scripts": {
     "dev": "next dev --port 3000",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start --port 3000",
     "typecheck": "tsc --noEmit",
     "lint": "next lint",
